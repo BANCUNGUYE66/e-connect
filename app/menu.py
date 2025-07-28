@@ -1,28 +1,34 @@
-from app.auth import register_graduate, login_graduate
+from . import database
+from . import register_graduate
+from . import show_graduates
 
-def main_menu():
+
+
+def menu():
+    print("🟢 Menu started")
     while True:
-        print("\n========== e-Connect ==========")
-        print("1. Graduate Login")
-        print("2. Graduate Register")
-        print("3. Company Login")
-        print("4. Company Register")
-        print("5. Admin Access (Coming Soon)")
-        print("0. Exit")
-        choice = input("Choose an option: ")
+        print("\n📘 e-Connect Menu")
+        print("1. Initialize Database")
+        print("2. Register Graduate")
+        print("3. Show Graduates")
+        print("4. Exit")
 
-        if choice == '1':
-            login_graduate()
-        elif choice == '2':
-            register_graduate()
-        elif choice == '3':
-            print("Company Login - Not implemented yet.")
-        elif choice == '4':
-            print("Company Register - Not implemented yet.")
-        elif choice == '5':
-            print("Admin access is under development.")
-        elif choice == '0':
-            print("Thanks for using e-Connect!")
+        choice = input("Enter choice: ")
+
+        if choice == "1":
+            database.init_db()
+        elif choice == "2":
+            name = input("Enter name: ")
+            email = input("Enter email: ")
+            password = input("Enter password: ")
+            register_graduate.register_graduate(name, email, password)
+        elif choice == "3":
+            show_graduates.show_graduates()
+        elif choice == "4":
+            print("👋 Goodbye!")
             break
         else:
-            print("Invalid choice. Please try again.")
+            print("❗Invalid choice. Try again.")
+
+if __name__ == "__main__":
+    menu()
